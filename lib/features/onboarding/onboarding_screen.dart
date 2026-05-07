@@ -209,18 +209,18 @@ class _OnboardingPage2 extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          _UsageStep(
+          const _UsageStep(
             number: '1',
             text: 'Włącz latarkę przyciskiem ⚡ w prawym górnym rogu',
           ),
           const SizedBox(height: 12),
-          _UsageStep(
+          const _UsageStep(
             number: '2',
             text: 'Powoli prowadź telefon przeciw kierunkowi włosa, '
                 '5–10 cm od skóry',
           ),
           const SizedBox(height: 12),
-          _UsageStep(
+          const _UsageStep(
             number: '3',
             text: 'Zwróć uwagę na małe, jasne (po inwersji) plamki — '
                 'to mogą być kleszcze',

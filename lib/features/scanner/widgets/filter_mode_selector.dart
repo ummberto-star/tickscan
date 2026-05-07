@@ -74,7 +74,7 @@ class _Pill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = Colors.white;
+    const color = Colors.white;
     return GestureDetector(
       onTap: isLocked ? null : onTap,
       child: AnimatedContainer(

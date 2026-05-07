@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../core/constants.dart' as constants;
 
-/// Educational screen with tick removal instructions and 3 affiliate cards.
 class TickRemovalScreen extends StatelessWidget {
   const TickRemovalScreen({super.key});
 
@@ -24,7 +23,6 @@ class TickRemovalScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Diagram placeholder
             Center(
               child: Container(
                 width: double.infinity,
@@ -43,20 +41,17 @@ class TickRemovalScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-
-            // Intro
             Text(
               'JAK BEZPIECZNIE USUNĄĆ KLESZCZA',
-              style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+              style: theme.textTheme.titleLarge
+                  ?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-
-            _Step(text: 'Nie panikuj. Im szybciej usuniesz kleszcza, tym mniejsze ryzyko zarażenia chorobami (borelioza, babeszjoza, anaplazmoza).'),
-            _Step(text: 'Użyj specjalnego narzędzia: haczyk do kleszczy (np. Tick Twister) lub pęseta z cienkimi końcówkami. NIE używaj palców.'),
-            _Step(text: 'Chwyć kleszcza JAK NAJBLIŻEJ skóry zwierzęcia, na samej głowie pasożyta.'),
-            _Step(text: 'Wyciągaj powolnym, prostym ruchem do góry — bez wykręcania, bez szarpania. Haczyki Tick Twister wymagają delikatnego ruchu obrotowego — sprawdź instrukcję producenta.'),
-            _Step(text: 'Po usunięciu zdezynfekuj miejsce ukąszenia (np. spirytusem salicylowym lub Octeniseptem).'),
-
+            const _Step(text: 'Nie panikuj. Im szybciej usuniesz kleszcza, tym mniejsze ryzyko zarażenia chorobami (borelioza, babeszjoza, anaplazmoza).'),
+            const _Step(text: 'Użyj specjalnego narzędzia: haczyk do kleszczy (np. Tick Twister) lub pęseta z cienkimi końcówkami. NIE używaj palców.'),
+            const _Step(text: 'Chwyć kleszcza JAK NAJBLIŻEJ skóry zwierzęcia, na samej głowie pasożyta.'),
+            const _Step(text: 'Wyciągaj powolnym, prostym ruchem do góry — bez wykręcania, bez szarpania. Haczyki Tick Twister wymagają delikatnego ruchu obrotowego — sprawdź instrukcję producenta.'),
+            const _Step(text: 'Po usunięciu zdezynfekuj miejsce ukąszenia (np. spirytusem salicylowym lub Octeniseptem).'),
             const SizedBox(height: 24),
             Text(
               'CZEGO NIE ROBIĆ:',
@@ -66,9 +61,9 @@ class TickRemovalScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            _Warning(text: 'Nie smaruj kleszcza tłuszczem, masłem, alkoholem ani lakierem do paznokci'),
-            _Warning(text: 'Nie przypalaj zapałką'),
-            _Warning(text: 'Nie wyciskaj'),
+            const _Warning(text: 'Nie smaruj kleszcza tłuszczem, masłem, alkoholem ani lakierem do paznokci'),
+            const _Warning(text: 'Nie przypalaj zapałką'),
+            const _Warning(text: 'Nie wyciskaj'),
             Text(
               'Te metody zwiększają ryzyko, że kleszcz wymiotuje treścią do rany.',
               style: theme.textTheme.bodyMedium?.copyWith(
@@ -76,27 +71,24 @@ class TickRemovalScreen extends StatelessWidget {
                 color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
               ),
             ),
-
             const SizedBox(height: 24),
             Text(
               'KIEDY DO WETERYNARZA:',
-              style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+              style: theme.textTheme.titleMedium
+                  ?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            _Bullet(text: 'Jeśli głowa kleszcza została w skórze'),
-            _Bullet(text: 'Jeśli pojawi się rumień, obrzęk, ropienie'),
-            _Bullet(text: 'Jeśli zwierzę staje się apatyczne, gorączkuje, kuleje, ma zmieniony apetyt'),
-            _Bullet(text: 'Profilaktycznie zawsze warto pokazać znalezionego kleszcza weterynarzowi i rozważyć test PCR'),
-
+            const _Bullet(text: 'Jeśli głowa kleszcza została w skórze'),
+            const _Bullet(text: 'Jeśli pojawi się rumień, obrzęk, ropienie'),
+            const _Bullet(text: 'Jeśli zwierzę staje się apatyczne, gorączkuje, kuleje, ma zmieniony apetyt'),
+            const _Bullet(text: 'Profilaktycznie zawsze warto pokazać znalezionego kleszcza weterynarzowi i rozważyć test PCR'),
             const SizedBox(height: 32),
-
-            // Affiliate cards
             Text(
               'Polecane produkty',
-              style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+              style: theme.textTheme.titleMedium
+                  ?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
-
             _AffiliateCard(
               title: 'Haczyki i pęsety',
               description: 'Narzędzia do bezpiecznego usuwania kleszczy',
@@ -120,10 +112,7 @@ class TickRemovalScreen extends StatelessWidget {
               url: constants.affiliateLinkTests,
               onTap: _launchAffiliate,
             ),
-
             const SizedBox(height: 32),
-
-            // Legal disclaimer
             Text(
               '⚠️ Powyższe informacje mają charakter edukacyjny i nie zastępują '
               'profesjonalnej porady weterynaryjnej. W razie wątpliwości zawsze '
@@ -154,12 +143,7 @@ class _Step extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('•  ', style: TextStyle(color: Theme.of(context).colorScheme.primary)),
-          Expanded(
-            child: Text(
-              text,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-          ),
+          Expanded(child: Text(text, style: Theme.of(context).textTheme.bodyLarge)),
         ],
       ),
     );
@@ -242,7 +226,11 @@ class _AffiliateCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold)),
+                  Text(title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall
+                          ?.copyWith(fontWeight: FontWeight.bold)),
                   const SizedBox(height: 4),
                   Text(description, style: Theme.of(context).textTheme.bodySmall),
                 ],

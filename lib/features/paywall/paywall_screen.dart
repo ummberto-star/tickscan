@@ -51,13 +51,13 @@ class PaywallScreen extends ConsumerWidget {
               ),
               const SizedBox(height: 32),
               // Features list
-              _FeatureRow(icon: Icons.tune, text: 'Suwaki kontrastu i jasności'),
+              const _FeatureRow(icon: Icons.tune, text: 'Suwaki kontrastu i jasności'),
               const SizedBox(height: 16),
-              _FeatureRow(icon: Icons.filter_alt, text: '3 zaawansowane tryby filtra (Mono Inverted dla czarnej sierści)'),
+              const _FeatureRow(icon: Icons.filter_alt, text: '3 zaawansowane tryby filtra (Mono Inverted dla czarnej sierści)'),
               const SizedBox(height: 16),
-              _FeatureRow(icon: Icons.camera_alt, text: 'Zapisywanie zdjęć do galerii'),
+              const _FeatureRow(icon: Icons.camera_alt, text: 'Zapisywanie zdjęć do galerii'),
               const SizedBox(height: 16),
-              _FeatureRow(icon: Icons.all_inclusive, text: 'Brak limitów, jednorazowy zakup, bez subskrypcji'),
+              const _FeatureRow(icon: Icons.all_inclusive, text: 'Brak limitów, jednorazowy zakup, bez subskrypcji'),
               const SizedBox(height: 40),
               // Price
               Container(
