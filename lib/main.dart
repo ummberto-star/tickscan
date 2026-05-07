@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app.dart';
-import 'core/constants.dart' as constants;
+import 'services/preferences_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,9 +11,27 @@ void main() async {
   // Request camera permission before app starts
   await Permission.camera.request();
 
-  // Determine if onboarding was already completed
+  // Initialize SharedPreferences
   final prefs = await SharedPreferences.getInstance();
-  final onboardingCompleted = prefs.getBool(constants.prefsKeyOnboardingCompleted) ?? false;
+  final prefsService = PreferencesService(prefs);
 
-  runApp(TickScanApp(showOnboarding: !onboardingCompleted));
+  // Determine if onboarding was already completed
+  final onboardingCompleted = prefsService.onboardingCompleted;
+
+  // Increment scan count on every app launch (used for paywall trigger)
+  final scanCount = await prefsService.incrementScanCount();
+  final shouldShowPaywall = scanCount >= 4; // trigger after 3rd use (4th launch shows paywall)
+
+  runApp(
+    ProviderScope(
+      overrides: [
+        // Override the abstract provider with our initialized instance
+        preferencesServiceProvider.overrideWithValue(prefsService),
+      ],
+      child: TickScanApp(
+        showOnboarding: !onboardingCompleted,
+        showPaywall: shouldShowPaywall,
+      ),
+    ),
+  );
 }

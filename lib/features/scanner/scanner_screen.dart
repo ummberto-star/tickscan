@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../services/purchase_service.dart';
 import '../guide/tick_removal_screen.dart';
+import '../paywall/paywall_screen.dart';
 import 'scanner_state.dart';
 import 'widgets/filter_mode_selector.dart';
 import 'widgets/torch_button.dart';
@@ -222,7 +223,7 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> with WidgetsBindi
               title: const Text('TickScan Pro'),
               onTap: () {
                 Navigator.pop(context);
-                // TODO: navigate to paywall
+                Navigator.of(context).push(MaterialPageRoute(builder: (_) => const PaywallScreen()));
               },
             ),
             const Divider(),
