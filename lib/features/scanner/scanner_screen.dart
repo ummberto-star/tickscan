@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../services/purchase_service.dart';
+import '../guide/tick_removal_screen.dart';
 import 'scanner_state.dart';
 import 'widgets/filter_mode_selector.dart';
 import 'widgets/torch_button.dart';
@@ -213,7 +214,7 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> with WidgetsBindi
               title: const Text('Jak usunąć kleszcza'),
               onTap: () {
                 Navigator.pop(context);
-                // TODO: navigate to tick_removal_screen
+                Navigator.of(context).push(MaterialPageRoute(builder: (_) => const TickRemovalScreen()));
               },
             ),
             ListTile(
