@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'app.dart';
+import 'core/constants.dart' as constants;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Request camera permission before app starts
-  // This ensures iOS and Android dialogs appear with Polish text
   await Permission.camera.request();
-  
-  runApp(const TickScanApp());
+
+  // Determine if onboarding was already completed
+  final prefs = await SharedPreferences.getInstance();
+  final onboardingCompleted = prefs.getBool(constants.prefsKeyOnboardingCompleted) ?? false;
+
+  runApp(TickScanApp(showOnboarding: !onboardingCompleted));
 }

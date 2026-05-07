@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/theme.dart';
+import 'features/onboarding/onboarding_screen.dart';
 import 'features/scanner/scanner_screen.dart';
 
 class TickScanApp extends StatelessWidget {
-  const TickScanApp({super.key});
+  final bool showOnboarding;
+
+  const TickScanApp({super.key, this.showOnboarding = false});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,7 @@ class TickScanApp extends StatelessWidget {
         theme: AppTheme.light,
         darkTheme: AppTheme.dark,
         themeMode: ThemeMode.system,
-        home: const ScannerScreen(),
+        home: showOnboarding ? const OnboardingScreen() : const ScannerScreen(),
       ),
     );
   }
