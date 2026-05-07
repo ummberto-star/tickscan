@@ -14,7 +14,7 @@ class AppTheme {
       elevation: 0,
     ),
     sliderTheme: const SliderThemeData(
-      showValueIndicator: ShowValueIndicator.onDrag,
+      showValueIndicator: ShowValueIndicator.always,
     ),
   );
 
@@ -28,7 +28,7 @@ class AppTheme {
       elevation: 0,
     ),
     sliderTheme: const SliderThemeData(
-      showValueIndicator: ShowValueIndicator.onDrag,
+      showValueIndicator: ShowValueIndicator.always,
     ),
   );
 }
