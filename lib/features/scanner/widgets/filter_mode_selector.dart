@@ -18,7 +18,7 @@ class FilterModeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),
       decoration: BoxDecoration(
         color: Colors.black.withValues(alpha: 0.45),
         borderRadius: BorderRadius.circular(28),
@@ -79,8 +79,8 @@ class _Pill extends StatelessWidget {
       onTap: isLocked ? null : onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-        margin: const EdgeInsets.symmetric(horizontal: 2),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        margin: const EdgeInsets.symmetric(horizontal: 1),
         decoration: BoxDecoration(
           color: isSelected ? color.withValues(alpha: 0.25) : Colors.transparent,
           borderRadius: BorderRadius.circular(20),
@@ -96,7 +96,7 @@ class _Pill extends StatelessWidget {
               label,
               style: TextStyle(
                 color: isLocked ? Colors.white38 : color,
-                fontSize: 13,
+                fontSize: 11,
                 fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
               ),
             ),

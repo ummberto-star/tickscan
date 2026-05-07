@@ -20,6 +20,7 @@ class ScannerScreen extends ConsumerStatefulWidget {
 }
 
 class _ScannerScreenState extends ConsumerState<ScannerScreen> with WidgetsBindingObserver {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
     super.initState();
@@ -68,6 +69,7 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> with WidgetsBindi
     final purchaseService = ref.read(purchaseServiceProvider);
 
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.black,
       body: cameraService.isInitialized
           ? GestureDetector(
@@ -110,7 +112,7 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> with WidgetsBindi
                         children: [
                           // Hamburger menu
                           GestureDetector(
-                            onTap: () => Scaffold.of(context).openDrawer(),
+                            onTap: () => _scaffoldKey.currentState?.openDrawer(),
                             child: Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
@@ -124,15 +126,17 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> with WidgetsBindi
                               ),
                             ),
                           ),
-                          const Spacer(),
-                          // Filter mode selector
-                          FilterModeSelector(
-                            currentMode: scannerState.mode,
-                            onModeChanged: (mode) =>
-                                ref.read(scannerStateProvider.notifier).setMode(mode),
-                            isPro: purchaseService.isPro,
+                          const SizedBox(width: 8),
+                          // Filter mode selector - Flexible to prevent overflow
+                          Flexible(
+                            child: FilterModeSelector(
+                              currentMode: scannerState.mode,
+                              onModeChanged: (mode) =>
+                                  ref.read(scannerStateProvider.notifier).setMode(mode),
+                              isPro: purchaseService.isPro,
+                            ),
                           ),
-                          const Spacer(),
+                          const SizedBox(width: 8),
                           // Torch button
                           TorchButton(
                             isTorchOn: cameraService.isTorchOn,

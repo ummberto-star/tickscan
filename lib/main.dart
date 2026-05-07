@@ -20,7 +20,7 @@ void main() async {
 
   // Increment scan count on every app launch (used for paywall trigger)
   final scanCount = await prefsService.incrementScanCount();
-  final shouldShowPaywall = scanCount >= 4; // trigger after 3rd use (4th launch shows paywall)
+  final shouldShowPaywall = scanCount >= 10; // trigger after 9 uses (10th launch shows paywall)
 
   runApp(
     ProviderScope(
