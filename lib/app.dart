@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'core/theme.dart';
+import 'features/scanner/scanner_screen.dart';
 
 class TickScanApp extends StatelessWidget {
   const TickScanApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'TickScan',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorSchemeSeed: const Color(0xFF2E7D32),
-        useMaterial3: true,
-        brightness: Brightness.light,
-      ),
-      home: const Scaffold(
-        body: Center(
-          child: Text('TickScan — KROK 1 ✅'),
-        ),
+    return ProviderScope(
+      child: MaterialApp(
+        title: 'TickScan',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
+        themeMode: ThemeMode.system,
+        home: const ScannerScreen(),
       ),
     );
   }
