@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import '../filter_matrix.dart';
 
 /// Horizontal row of 3 pill-shaped buttons to switch between filter modes.
+/// Free users can only use negative mode; Pro modes show a lock overlay.
 class FilterModeSelector extends StatelessWidget {
   final FilterMode currentMode;
   final ValueChanged<FilterMode> onModeChanged;
-  
+  final bool isPro;
+
   const FilterModeSelector({
     super.key,
     required this.currentMode,
     required this.onModeChanged,
+    required this.isPro,
   });
 
   @override
@@ -25,18 +28,28 @@ class FilterModeSelector extends StatelessWidget {
         children: [
           _Pill(
             label: 'Negatyw',
+            icon: null,
             isSelected: currentMode == FilterMode.negative,
+            isLocked: false,
             onTap: () => onModeChanged(FilterMode.negative),
           ),
           _Pill(
             label: 'Kontrast',
+            icon: isPro ? null : Icons.lock,
             isSelected: currentMode == FilterMode.highContrast,
-            onTap: () => onModeChanged(FilterMode.highContrast),
+            isLocked: !isPro,
+            onTap: () {
+              if (isPro) onModeChanged(FilterMode.highContrast);
+            },
           ),
           _Pill(
             label: 'Mono Inv.',
+            icon: isPro ? null : Icons.lock,
             isSelected: currentMode == FilterMode.monoInverted,
-            onTap: () => onModeChanged(FilterMode.monoInverted),
+            isLocked: !isPro,
+            onTap: () {
+              if (isPro) onModeChanged(FilterMode.monoInverted);
+            },
           ),
         ],
       ),
@@ -46,12 +59,16 @@ class FilterModeSelector extends StatelessWidget {
 
 class _Pill extends StatelessWidget {
   final String label;
+  final IconData? icon;
   final bool isSelected;
+  final bool isLocked;
   final VoidCallback onTap;
 
   const _Pill({
     required this.label,
+    required this.icon,
     required this.isSelected,
+    required this.isLocked,
     required this.onTap,
   });
 
@@ -59,7 +76,7 @@ class _Pill extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = Colors.white;
     return GestureDetector(
-      onTap: onTap,
+      onTap: isLocked ? null : onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
@@ -68,13 +85,22 @@ class _Pill extends StatelessWidget {
           color: isSelected ? color.withValues(alpha: 0.25) : Colors.transparent,
           borderRadius: BorderRadius.circular(20),
         ),
-        child: Text(
-          label,
-          style: TextStyle(
-            color: color,
-            fontSize: 13,
-            fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-          ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (icon != null) ...[
+              Icon(icon, color: Colors.white38, size: 14),
+              const SizedBox(width: 4),
+            ],
+            Text(
+              label,
+              style: TextStyle(
+                color: isLocked ? Colors.white38 : color,
+                fontSize: 13,
+                fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+              ),
+            ),
+          ],
         ),
       ),
     );

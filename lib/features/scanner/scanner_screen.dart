@@ -64,6 +64,7 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> with WidgetsBindi
   Widget build(BuildContext context) {
     final cameraService = ref.watch(cameraServiceProvider);
     final scannerState = ref.watch(scannerStateProvider);
+    final purchaseService = ref.read(purchaseServiceProvider);
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -128,6 +129,7 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> with WidgetsBindi
                             currentMode: scannerState.mode,
                             onModeChanged: (mode) =>
                                 ref.read(scannerStateProvider.notifier).setMode(mode),
+                            isPro: purchaseService.isPro,
                           ),
                           const Spacer(),
                           // Torch button
@@ -155,12 +157,12 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> with WidgetsBindi
                               ref.read(scannerStateProvider.notifier).setContrast(v),
                           onBrightnessChanged: (v) =>
                               ref.read(scannerStateProvider.notifier).setBrightness(v),
-                          isPro: false, // TODO: wire real Pro state
+                          isPro: purchaseService.isPro,
                         ),
                         const SizedBox(height: 12),
                         CaptureButton(
                           onCapture: _handleCapture,
-                          isPro: false, // TODO: wire real Pro state
+                          isPro: purchaseService.isPro,
                         ),
                         SizedBox(height: MediaQuery.of(context).padding.bottom + 20),
                       ],
